@@ -38,7 +38,17 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    return expr.split("**********").map(element => {
+        return new Array(element.length / 10).fill(" ").map((cv, index) => {
+            cv = element.slice(index * 10, (index + 1) * 10);
+            
+            while(cv.indexOf("0") != -1 || cv.indexOf("1") != -1) {
+                cv = cv.replace("00", "").replace("10", ".").replace("11", "-");
+            }
+
+            return MORSE_TABLE[cv];
+        }).join("");
+    }).join(" ");
 }
 
 module.exports = {
